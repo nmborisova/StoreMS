@@ -11,7 +11,7 @@ public class Product {
     private Timestamp created;
     private boolean is_active;
 
-    Product() {
+    public Product() {
 
     }
 
