@@ -15,10 +15,13 @@ public class ProductService implements ProductServiceI {
 
     private DataSource dataSource;
     private Connection connection;
+    private CategoryServiceI categoryService;
 
     public ProductService() throws SQLException {
         dataSource = DBManager.getInstance().getDataSource();
+        categoryService = new CategoryService();
     }
+
     @Override
     public List<Product> getAll() throws SQLException {
         try {
@@ -30,6 +33,10 @@ public class ProductService implements ProductServiceI {
                 while (resultSet.next()) {
                     Product product = new Product();
                     product.setName(resultSet.getString("name"));
+                    product.setDescription(resultSet.getString("description"));
+                    long category_id = resultSet.getLong("category_id");
+                    System.out.println(category_id);
+                    product.setCategory(categoryService.getCategoryById(category_id));
                     products.add(product);
                 }
                 return products;
