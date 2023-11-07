@@ -15,5 +15,8 @@ public class Main {
         for (Product p :allProducts) {
             System.out.println(p.getName());
         }
+
+        Product firstProduct = service.getById(1);
+        System.out.println(firstProduct.getName());
     }
 }
